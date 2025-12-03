@@ -1,0 +1,8 @@
+{
+    // This empty object is often enough to force lua_ls to recognize the workspace
+    "workspace": {
+    },
+    "diagnostics.globals": [
+        "vim"
+    ]
+}

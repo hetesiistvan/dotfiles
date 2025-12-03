@@ -1,0 +1,5 @@
+require("config.basic-settings").setup()
+require("config.filetype-settings").setup()
+require("config.char-list-settings").setup()
+require("lazy.setup").setup()
+require("config.linting-settings").setup()

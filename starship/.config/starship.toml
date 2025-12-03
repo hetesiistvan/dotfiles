@@ -1,0 +1,165 @@
+add_newline = true
+
+format = """
+${custom.bracket_top}\
+${custom.line_start}\
+$username\
+$hostname\
+${custom.hostname_time_separator}\
+$time\
+${custom.time_dir_separator}\
+$directory\
+${custom.dir_git_separator}\
+$git_branch\
+$git_status\
+${custom.no_git_repo}\
+${custom.git_k8s_separator}\
+$kubernetes\
+${custom.no_k8s}\
+${custom.line_end}\
+$fill\
+$status\
+$cmd_duration
+${custom.bracket_bottom}\
+$character
+"""
+
+# =====================================
+# Start of the first line
+# =====================================
+[custom.bracket_top]
+command = "echo -n '╭─'"
+when = true
+style = "fg:#586e75"
+format = "[$output]($style) "
+
+[custom.line_start]
+when = true
+symbol = ""
+style = "fg:#EFEB99 bg:black"
+format = "[$symbol]($style)"
+
+# =====================================
+# User + Hostname block
+# =====================================
+[username]
+style_user = "bold fg:black bg:#EFEB99"
+format = "[ $user]($style)"
+
+[hostname]
+ssh_only = false
+style = "bold fg:black bg:#EFEB99"
+format = "[@$hostname ]($style)"
+
+[custom.hostname_time_separator]
+when = true
+symbol = ""
+style = "fg:#EFEB99 bg:black"
+format = "[$symbol]($style)"
+
+# =====================================
+# Time block
+# =====================================
+[time]
+disabled = false
+time_format = "%R"
+style = "bold bg:black fg:#EFEB99"
+format = '[ 󱑍 $time ]($style)'
+
+[custom.time_dir_separator]
+when = true
+symbol = ""
+style = "fg:black bg:#268bd2"
+format = "[$symbol]($style)"
+
+# =====================================
+# Directory block
+# =====================================
+[directory]
+format = "[ ﱮ $path ](bold fg:#fdf6e3 bg:#268bd2)"
+
+[custom.dir_git_separator]
+when = true
+symbol = ""
+style = "fg:#268bd2 bg:#4CB5A5"
+format = "[$symbol]($style)"
+
+# =====================================
+# Git block
+# =====================================
+[git_branch]
+style = "bold fg:#fdf6e3 bg:#4CB5A5"
+symbol = ""
+format = "[ $symbol $branch(:$remote_branch) ]($style)"
+
+[git_status]
+style = "bold fg:#fdf6e3 bg:#4CB5A5"
+format = "[ - $all_status$ahead_behind ]($style)"
+
+# We display this in absence of a git repo
+[custom.no_git_repo]
+when = true
+style = "bold fg:#fdf6e3 bg:#4CB5A5"
+command = "[[ -n \"$(git rev-parse --is-inside-work-tree 2>/dev/null)\" ]] || echo ' -'"
+format = "[ $output ]($style)"
+
+[custom.git_k8s_separator]
+when = true
+symbol = ""
+style = "fg:#4CB5A5 bg:#fdf6e3"
+format = "[$symbol]($style)"
+
+# =====================================
+# Kubernetes block
+# =====================================
+[kubernetes]
+style = "bold fg:black bg:#fdf6e3"
+disabled = false
+format = "[ $symbol$context($namespace) ]($style)"
+
+# We display this in absence of a kubectl config file
+[custom.no_k8s]
+when = true
+style = "bold fg:black bg:#fdf6e3"
+command = "[[ -f ~/.kube/config ]] || echo '☸ -'"
+format = "[ $output ]($style)"
+
+[custom.line_end]
+when = true
+symbol = ""
+style = "fg:#fdf6e3 bg:black"
+format = "[$symbol]($style)"
+
+# =====================================
+# Right side of the first line
+# =====================================
+[fill]
+symbol = " "
+
+[status]
+disabled = false
+symbol = "Return code"
+format = "[$symbol $status]($style) "
+
+[cmd_duration]
+min_time = 500
+disabled = false
+format = "[(took $duration) ]($style)"
+
+# =====================================
+# Bottom line
+# =====================================
+[custom.bracket_bottom]
+command = "echo -n '╰─'"
+when = true
+style = "fg:#586e75"
+format = "[$output]($style) "
+
+# =====================================
+# Character (input prompt)
+# =====================================
+[character]
+success_symbol = "[>](bold white) "
+error_symbol   = "[>](bold white) "
+format = "$symbol"
+

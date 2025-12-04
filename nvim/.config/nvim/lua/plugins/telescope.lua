@@ -20,6 +20,7 @@ return {
             vim.keymap.set("n", "<leader>fs", builtin.search_history, { desc = "Telescope search history" })
             vim.keymap.set("n", "<leader>fu", builtin.spell_suggest, { desc = "Telescope spell suggestions" })
             vim.keymap.set("n", "<leader>s", "/<C-R><C-W><CR>N", { desc = "Search the word under the cursor" })
+            vim.keymap.set("v", "_s", 'y/<C-R>"<CR>N', { desc = "Search the word under the cursor" })
             vim.keymap.set("n", "<leader>c", function()
                 vim.fn.setreg("/", "")
             end, { desc = "Clear search" })

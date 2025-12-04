@@ -2,6 +2,8 @@ return {
     "stevearc/conform.nvim",
     opts = {},
     config = function()
+        local max_line_width = 120
+
         require("conform").setup({
             formatters_by_ft = {
                 lua = { "stylua" },
@@ -30,9 +32,25 @@ return {
                         "Spaces",
                         "--indent-width",
                         "4",
+                        "--column-width",
+                        max_line_width,
+                    },
+                },
+                black = {
+                    prepend_args = {
+                        "--line-length",
+                        max_line_width,
+                    },
+                },
+                prettier = {
+                    prepend_args = {
+                        "--print-width",
+                        max_line_width,
                     },
                 },
             },
         })
+
+        vim.opt.textwidth = max_line_width
     end,
 }

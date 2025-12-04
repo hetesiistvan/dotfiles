@@ -1,0 +1,36 @@
+# This file contains useful shell customisations. It needs to be surced in .bashrc or in .zshrc
+
+## VI mode
+set -o vi
+
+## Brew configuration
+if [[ "$(uname)" == "Darwin" ]]; then
+    if [[ -f /opt/homebrew/bin/brew ]]; then
+	    eval "$(/opt/homebrew/bin/brew shellenv)"
+	elif [[ -f /usr/local/bin/brew ]]; then
+	    eval "$(/usr/local/bin/brew shellenv)"
+    fi
+fi
+
+## Kubernetes related configuration
+export KUBE_EDITOR=nvim
+# This one is used by Terraform
+export KUBE_CONFIG_PATH=~/.kube/config
+
+## Proxy settings
+if [[ -n "${PROXY_URL:-}" ]]; then
+    alias proxy_on="export HTTP_PROXY=${PROXY_URL} HTTPS_PROXY=${PROXY_URL} ALL_PROXY=${PROXY_URL} http_proxy=${PROXY_URL} https_proxy=${PROXY_URL} all_proxy=${PROXY_URL} proxy=on"
+    alias proxy_off="unset HTTP_PROXY HTTPS_PROXY ALL_PROXY http_proxy https_proxy all_proxy proxy"
+fi
+
+## Zoxide init
+SHELL_BN="$(basename "${SHELL}")"
+eval "$(zoxide init "${SHELL_BN}")"
+
+## Starship configuration
+eval "$(starship init "${SHELL_BN}")"
+
+## Aliases
+alias le="eza -o --no-permissions -g -h --group-directories-first --icons -a --git"
+alias hist_search='eval "$(history | awk '\''{$1=""; sub(/^ +/, ""); print}'\'' | sort | uniq | fzf)"'
+alias bn="basename"

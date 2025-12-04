@@ -94,7 +94,7 @@ format = "[ $symbol $branch(:$remote_branch) ]($style)"
 
 [git_status]
 style = "bold fg:#fdf6e3 bg:#4CB5A5"
-format = "[ - $all_status$ahead_behind ]($style)"
+format = "[ - $all_status$ahead_behind]($style)"
 
 # We display this in absence of a git repo
 [custom.no_git_repo]

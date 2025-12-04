@@ -1,7 +1,13 @@
 # This file contains useful shell customisations. It needs to be surced in .bashrc or in .zshrc
 
+SHELL_BN="$(basename "${SHELL}")"
+
 ## VI mode
-set -o vi
+if [[ "${SHELL_BN}" == "bash" ]]; then
+    set -o vi
+elif [[ "${SHELL_BN}" == "zsh" ]]; then
+    bindkey -v
+fi
 
 ## Brew configuration
 if [[ "$(uname)" == "Darwin" ]]; then
@@ -24,13 +30,16 @@ if [[ -n "${PROXY_URL:-}" ]]; then
 fi
 
 ## Zoxide init
-SHELL_BN="$(basename "${SHELL}")"
 eval "$(zoxide init "${SHELL_BN}")"
 
 ## Starship configuration
 eval "$(starship init "${SHELL_BN}")"
 
+## Thefuck settings
+eval $(thefuck --alias)
+
 ## Aliases
 alias le="eza -o --no-permissions -g -h --group-directories-first --icons -a --git"
 alias hist_search='eval "$(history | awk '\''{$1=""; sub(/^ +/, ""); print}'\'' | sort | uniq | fzf)"'
 alias bn="basename"
+alias my-cmatrix="cmatrix -b -s -u 9"

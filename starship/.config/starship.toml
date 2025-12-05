@@ -43,6 +43,8 @@ format = "[$symbol]($style)"
 # User + Hostname block
 # =====================================
 [username]
+disabled = false
+show_always = true
 style_user = "bold fg:black bg:#EFEB99"
 format = "[ $user]($style)"
 
@@ -90,17 +92,17 @@ format = "[$symbol]($style)"
 [git_branch]
 style = "bold fg:#fdf6e3 bg:#4CB5A5"
 symbol = ""
-format = "[ $symbol $branch(:$remote_branch) ]($style)"
+format = "[ $symbol $branch]($style)"
 
 [git_status]
 style = "bold fg:#fdf6e3 bg:#4CB5A5"
-format = "[ - $all_status$ahead_behind]($style)"
+format = "[ \\(status: $all_status$ahead_behind\\) ]($style)"
 
 # We display this in absence of a git repo
 [custom.no_git_repo]
-when = true
+when = '[[ -z "$(git rev-parse --is-inside-work-tree 2>/dev/null)" ]]'
 style = "bold fg:#fdf6e3 bg:#4CB5A5"
-command = "[[ -n \"$(git rev-parse --is-inside-work-tree 2>/dev/null)\" ]] || echo ' -'"
+command = 'echo -e " -"'
 format = "[ $output ]($style)"
 
 [custom.git_k8s_separator]
@@ -115,13 +117,13 @@ format = "[$symbol]($style)"
 [kubernetes]
 style = "bold fg:black bg:#fdf6e3"
 disabled = false
-format = "[ $symbol$context($namespace) ]($style)"
+format = "[ $symbol$context\\($namespace\\) ]($style)"
 
 # We display this in absence of a kubectl config file
 [custom.no_k8s]
-when = true
+when = "[[ ! -f ~/.kube/config ]]"
 style = "bold fg:black bg:#fdf6e3"
-command = "[[ -f ~/.kube/config ]] || echo '☸ -'"
+command = "echo '☸ -'"
 format = "[ $output ]($style)"
 
 [custom.line_end]

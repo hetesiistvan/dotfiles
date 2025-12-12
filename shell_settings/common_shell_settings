@@ -93,12 +93,22 @@ eval "$(starship init "${SHELL_BN}")"
 ## Thefuck settings
 eval $(thefuck --alias)
 
+## Terminal related settings
+TERM="screen-256color"
+export TERM
+
 #### ZSH customisations
 if [[ "${SHELL_BN}" == "zsh" ]]; then
     ## Autocomplete
     fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
     autoload -Uz compinit
     compinit
+
+    ## History
+    setopt HIST_IGNORE_ALL_DUPS
+    setopt HIST_SAVE_NO_DUPS
+    setopt SHARE_HISTORY
+    setopt INC_APPEND_HISTORY
 
     #### Plugin configuration
     ## Zinit configuration

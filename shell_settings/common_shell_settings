@@ -18,16 +18,71 @@ if [[ "$(uname)" == "Darwin" ]]; then
     fi
 fi
 
+## Sourcing SDKman init script
+SDKMAN_BASE_DIR="$(realpath "${HOME}/.sdkman")"
+if [[ -d "${SDKMAN_BASE_DIR}" ]]; then
+    SDKMAN_DIR="${SDKMAN_BASE_DIR}"
+    export SDKMAN_DIR
+
+    [[ -s "${SDKMAN_DIR}/bin/sdkman-init.sh" ]] && source "${SDKMAN_DIR}/bin/sdkman-init.sh"
+
+    JAVA_HOME="${SDKMAN_DIR}/candidates/java/current"
+    export JAVA_HOME
+
+    PATH="${PATH}:${JAVA_HOME}/bin"
+    export PATH
+fi
+
+## Node / Npm settings
+NVM_DIR="$(realpath "${HOME}/.nvm")"
+if [[ -d "${NVM_DIR}" ]]; then
+    export NVM_DIR
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+fi
+
+## GPG related configuration
+export GPG_TTY=$(tty)
+
 ## Kubernetes related configuration
 export KUBE_EDITOR=nvim
 # This one is used by Terraform
 export KUBE_CONFIG_PATH=~/.kube/config
+
+## Path extension
+extend_path() {
+    path_element="${1:-}"
+    position="${2:-last}"
+    if [[ -d "${path_element}" ]]; then
+        case "${position}" in
+            first)
+                PATH="${path_element}:${PATH}"
+                ;;
+            last)
+                PATH="${PATH}:${path_element}"
+                ;;
+            *)
+                echo "ERROR: Invalid position specified!"
+                exit 1
+        esac
+        export PATH
+    fi
+}
+extend_path "~/version-lock" "first"
+for path_element_list_item in "~/bin" "~/go/bin" "~/.krew/bin"; do
+    extend_path "${path_element_list_item}"
+done
 
 ## Proxy settings
 if [[ -n "${PROXY_URL:-}" ]]; then
     alias proxy_on="export HTTP_PROXY=${PROXY_URL} HTTPS_PROXY=${PROXY_URL} ALL_PROXY=${PROXY_URL} http_proxy=${PROXY_URL} https_proxy=${PROXY_URL} all_proxy=${PROXY_URL} proxy=on"
     alias proxy_off="unset HTTP_PROXY HTTPS_PROXY ALL_PROXY http_proxy https_proxy all_proxy proxy"
 fi
+
+## Aliases
+alias le="eza -o --no-permissions -g -h --group-directories-first --icons -a --git"
+alias bn="basename"
+alias my-cmatrix="cmatrix -b -s -u 9"
 
 ## Zoxide init
 eval "$(zoxide init "${SHELL_BN}")"
@@ -38,8 +93,34 @@ eval "$(starship init "${SHELL_BN}")"
 ## Thefuck settings
 eval $(thefuck --alias)
 
-## Aliases
-alias le="eza -o --no-permissions -g -h --group-directories-first --icons -a --git"
-alias hist_search='eval "$(history | awk '\''{$1=""; sub(/^ +/, ""); print}'\'' | sort | uniq | fzf)"'
-alias bn="basename"
-alias my-cmatrix="cmatrix -b -s -u 9"
+#### ZSH customisations
+if [[ "${SHELL_BN}" == "zsh" ]]; then
+    ## Autocomplete
+    fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
+    autoload -Uz compinit
+    compinit
+
+    #### Plugin configuration
+    ## Zinit configuration
+    if [ ! -d ~/.zinit/bin ]; then
+        mkdir -p ~/.zinit
+        git clone https://github.com/zdharma-continuum/zinit ~/.zinit/bin
+    fi
+    source ~/.zinit/bin/zinit.zsh
+
+    ## Zsh syntax highlighting
+    zinit light zsh-users/zsh-syntax-highlighting
+
+    ## Zsh autosuggestions
+    zinit light zsh-users/zsh-autosuggestions
+    bindkey '^F' autosuggest-accept
+
+    ## Zsh history substring search
+    zinit light zsh-users/zsh-history-substring-search
+    bindkey '^p' history-substring-search-up
+    bindkey '^n' history-substring-search-down
+
+    ## Zsh FZF history search
+    zinit snippet https://github.com/junegunn/fzf/blob/master/shell/key-bindings.zsh
+    zinit snippet https://github.com/junegunn/fzf/blob/master/shell/completion.zsh
+fi

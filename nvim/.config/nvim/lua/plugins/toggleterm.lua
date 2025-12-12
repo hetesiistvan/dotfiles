@@ -54,7 +54,7 @@ return {
 
         vim.keymap.set(
             "n",
-            "<leader>th",
+            "<leader>eh",
             h_terminal_open,
             { noremap = true, silent = true, desc = "Toggle horizontal terminal" }
         )
@@ -77,7 +77,7 @@ return {
 
         vim.keymap.set(
             "n",
-            "<leader>tf",
+            "<leader>ef",
             f_terminal_open,
             { noremap = true, silent = true, desc = "Toggle floating terminal" }
         )

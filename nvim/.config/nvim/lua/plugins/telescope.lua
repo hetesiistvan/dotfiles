@@ -2,7 +2,11 @@ return {
     {
         "nvim-telescope/telescope.nvim",
         tag = "v0.1.9",
-        dependencies = { "nvim-lua/plenary.nvim" },
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-telescope/telescope-ui-select.nvim",
+            { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+        },
         config = function()
             local builtin = require("telescope.builtin")
             vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Telescope find files" })
@@ -24,17 +28,8 @@ return {
             vim.keymap.set("n", "<leader>c", function()
                 vim.fn.setreg("/", "")
             end, { desc = "Clear search" })
-        end,
-    },
-    {
-        "nvim-telescope/telescope-ui-select.nvim",
-        config = function()
+
             require("telescope").setup({
-                extensions = {
-                    ["ui-select"] = {
-                        require("telescope.themes").get_dropdown({}),
-                    },
-                },
                 pickers = {
                     find_files = {
                         hidden = true,
@@ -50,9 +45,22 @@ return {
                     },
                 },
                 defaults = {
+                    fuzzy = true,
+                    file_sorter = require("telescope.sorters").get_fzf_sorter,
+                    generic_sorter = require("telescope.sorters").get_fzf_sorter,
                     file_ignore_patterns = {
                         "node_modules/",
                         ".git/",
+                        ".terraform/",
+                    },
+                },
+                extensions = {
+                    ["ui-select"] = {
+                        require("telescope.themes").get_dropdown({}),
+                    },
+                    fzf = {
+                        override_file_sorter = true,
+                        override_generic_sorter = true,
                     },
                 },
             })

@@ -7,7 +7,8 @@ return {
             head = "TabLine",
             current_tab = "TabLineSel",
             tab = "TabLine",
-            win = "TabLine",
+            -- Use the :hi command to list the available highlight groups
+            win = "CursorLineNr",
             tail = "TabLine",
         }
         require("tabby").setup({

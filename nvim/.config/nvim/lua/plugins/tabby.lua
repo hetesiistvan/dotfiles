@@ -8,7 +8,7 @@ return {
             current_tab = "TabLineSel",
             tab = "TabLine",
             -- Use the :hi command to list the available highlight groups
-            win = "CursorLineNr",
+            win = { fg = "#568e75", bg = "#0c4e53", style = "italic" },
             tail = "TabLine",
         }
         require("tabby").setup({

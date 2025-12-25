@@ -1,6 +1,7 @@
 # Agent Notes (dotfiles)
 
 - Repo type: dotfiles (no CI/build system detected).
+- Neovim version: latest stable (uses modern `vim.lsp.config`/`vim.lsp.enable` API from 0.11+).
 - Cursor/Copilot rules: none found (no `.cursorrules`, no `.cursor/rules/`, no `.github/copilot-instructions.md`).
 
 ## Validate (Build/Lint/Test)

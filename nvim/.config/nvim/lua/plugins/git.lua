@@ -11,7 +11,7 @@ return {
             "n",
             "<leader>gb",
             ":Gitsigns toggle_current_line_blame<CR>",
-            { desc = "Shows the actual git hunk as preview" }
+            { desc = "Toggles to show the git blame" }
         )
         require("gitsigns").setup()
     end,

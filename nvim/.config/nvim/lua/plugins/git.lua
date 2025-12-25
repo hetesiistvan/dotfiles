@@ -4,14 +4,15 @@ return {
         vim.keymap.set(
             "n",
             "<leader>gp",
-            "Gitsigns: preview_hunk<CR>",
+            ":Gitsigns preview_hunk<CR>",
             { desc = "Shows the actual git hunk as preview" }
         )
         vim.keymap.set(
             "n",
             "<leader>gb",
-            "Gitsigns: toggle_current_line_blame<CR>",
+            ":Gitsigns toggle_current_line_blame<CR>",
             { desc = "Shows the actual git hunk as preview" }
         )
+        require("gitsigns").setup()
     end,
 }

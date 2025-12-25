@@ -8,7 +8,7 @@ return {
             formatters_by_ft = {
                 lua = { "stylua" },
                 python = { "black" },
-                tf = { "terraform_fmt" },
+                terraform = { "terraform_fmt" },
                 go = { "gofmt" },
                 bash = { "shfmt" },
                 yaml = { "prettier" },

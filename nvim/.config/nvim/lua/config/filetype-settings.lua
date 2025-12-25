@@ -9,7 +9,6 @@ function M.setup()
         pattern = "*.tf",
         callback = function()
             vim.bo.shiftwidth = 2
-            vim.bo.filetype = "tf"
         end,
     })
 

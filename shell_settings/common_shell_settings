@@ -9,6 +9,12 @@ elif [[ "${SHELL_BN}" == "zsh" ]]; then
     bindkey -v
 fi
 
+## Shell editor
+EDITOR="nvim"
+export EDITOR
+VISUAL="nvim"
+export VISUAL
+
 ## Brew configuration
 if [[ "$(uname)" == "Darwin" ]]; then
     if [[ -f /opt/homebrew/bin/brew ]]; then
@@ -42,12 +48,15 @@ if [[ -d "${NVM_DIR}" ]]; then
 fi
 
 ## GPG related configuration
-export GPG_TTY=$(tty)
+GPG_TTY=$(tty)
+export GPG_TTY
 
 ## Kubernetes related configuration
-export KUBE_EDITOR=nvim
+KUBE_EDITOR=nvim
+export KUBE_EDITOR
 # This one is used by Terraform
-export KUBE_CONFIG_PATH=~/.kube/config
+KUBE_CONFIG_PATH=~/.kube/config
+export KUBE_CONFIG_PATH
 
 ## Path extension
 extend_path() {

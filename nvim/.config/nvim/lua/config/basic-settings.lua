@@ -26,6 +26,25 @@ function M.setup()
     vim.opt.swapfile = false
     vim.opt.backup = false
     vim.opt.writebackup = false
+
+    -- line moving and indentation
+    vim.keymap.set("n", "<Tab>h", "<<", { desc = "Indent line left (normal mode)" })
+    vim.keymap.set("n", "<Tab>l", ">>", { desc = "Indent line right (normal mode)" })
+    vim.keymap.set("v", "<Tab>h", "<gv", { desc = "Indent line left (visual mode)" })
+    vim.keymap.set("v", "<Tab>l", ">gv", { desc = "Indent line right (visual mode)" })
+    vim.keymap.set("n", "<Tab>k", ":m .-2<CR>==", { desc = "Move line up (normal mode)" })
+    vim.keymap.set("n", "<Tab>j", ":m .+1<CR>==", { desc = "Move line down (normal mode)" })
+    vim.keymap.set("v", "<Tab>k", ":m '<-2<CR>gv=gv", { desc = "Move line up (visual mode)" })
+    vim.keymap.set("v", "<Tab>j", ":m '>+1<CR>gv=gv", { desc = "Move line down (visual mode)" })
+
+    -- window management
+    local window_command_group = vim.api.nvim_create_augroup("WindowManagement", { clear = true })
+    vim.api.nvim_create_autocmd("VimResized", {
+        group = window_command_group,
+        callback = function()
+            vim.cmd("tabdo wincmd =")
+        end,
+    })
 end
 
 return M

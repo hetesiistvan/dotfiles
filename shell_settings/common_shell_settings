@@ -109,6 +109,10 @@ export TERM
 #### ZSH customisations
 if [[ "${SHELL_BN}" == "zsh" ]]; then
     ## Autocomplete
+    docker_completion_path="${HOME}/.docker/completion"
+    if [[ -d "${docker_completion_path}" ]]; then
+        fpath=(${docker_completion_path} $fpath)
+    fi
     fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
     autoload -Uz compinit
     compinit

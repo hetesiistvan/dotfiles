@@ -22,7 +22,7 @@ return {
         config = function()
             require("mason").setup()
 
-            vim.keymap.set("n", "<leader>M", ":Mason<CR>", { desc = "Launch Mason UI" })
+            vim.keymap.set("n", "<leader>M", ":Mason<CR>", { silent = true, desc = "Launch Mason UI" })
         end,
     },
     {
@@ -50,8 +50,8 @@ return {
                 vim.lsp.enable(language_server)
             end
 
-            vim.keymap.set("n", "<leader>lh", vim.lsp.buf.hover, { desc = "LSP hover" })
-            vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { desc = "LSP code actions" })
+            vim.keymap.set("n", "<leader>lh", vim.lsp.buf.hover, { silent = true, desc = "LSP hover" })
+            vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { silent = true, desc = "LSP code actions" })
         end,
     },
 }

@@ -20,7 +20,7 @@ function M.setup()
 
     require("lazy").setup("plugins", require("lazy.conf"))
 
-    vim.keymap.set("n", "<leader>L", ":Lazy<CR>", { desc = "Opens Lazy UI" })
+    vim.keymap.set("n", "<leader>L", ":Lazy<CR>", { silent = true, desc = "Opens Lazy UI" })
 end
 
 return M

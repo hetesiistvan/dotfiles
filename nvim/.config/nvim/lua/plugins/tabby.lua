@@ -54,9 +54,14 @@ return {
         vim.o.showtabline = 2
 
         -- Setting up keyboard shortcuts
-        vim.keymap.set("n", "<leader>tn", ":tabnew<CR>", { desc = "Open a new tab" })
-        vim.keymap.set("n", "<leader>tj", ":Tabby jump_to_tab<CR>", { desc = "Jump to a tab (in jump mode)" })
-        vim.keymap.set("n", "<leader>tc", ":tabclose<CR>", { desc = "Close the current tab" })
-        vim.keymap.set("n", "<leader>tl", ":tablast<CR>", { desc = "Jump to the last tab" })
+        vim.keymap.set("n", "<leader>tn", ":tabnew<CR>", { silent = true, desc = "Open a new tab" })
+        vim.keymap.set(
+            "n",
+            "<leader>tj",
+            ":Tabby jump_to_tab<CR>",
+            { silent = true, desc = "Jump to a tab (in jump mode)" }
+        )
+        vim.keymap.set("n", "<leader>tc", ":tabclose<CR>", { silent = true, desc = "Close the current tab" })
+        vim.keymap.set("n", "<leader>tl", ":tablast<CR>", { silent = true, desc = "Jump to the last tab" })
     end,
 }

@@ -5,13 +5,13 @@ return {
             "n",
             "<leader>gp",
             ":Gitsigns preview_hunk<CR>",
-            { desc = "Shows the actual git hunk as preview" }
+            { silent = true, desc = "Shows the actual git hunk as preview" }
         )
         vim.keymap.set(
             "n",
             "<leader>gb",
             ":Gitsigns toggle_current_line_blame<CR>",
-            { desc = "Toggles to show the git blame" }
+            { silent = true, desc = "Toggles to show the git blame" }
         )
         require("gitsigns").setup()
     end,

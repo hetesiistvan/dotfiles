@@ -23,22 +23,27 @@ return {
                 "n",
                 "<leader>nn",
                 ":Neotree filesystem left<CR>",
-                { desc = "Open Neotree filesystem wo revealing" }
+                { silent = true, desc = "Open Neotree filesystem wo revealing" }
             )
             vim.keymap.set(
                 "n",
                 "<leader>nr",
                 ":Neotree filesystem reveal left<CR>",
-                { desc = "Open Neotre filesystem with revealing" }
+                { silent = true, desc = "Open Neotre filesystem with revealing" }
             )
-            vim.keymap.set("n", "<leader>nc", ":Neotree close<CR>", { desc = "Neotree close" })
-            vim.keymap.set("n", "<leader>nb", ":Neotree buffers<CR>", { desc = "Neotree show buffers" })
-            vim.keymap.set("n", "<leader>ng", ":Neotree git_status<CR>", { desc = "Neotree show git status" })
+            vim.keymap.set("n", "<leader>nc", ":Neotree close<CR>", { silent = true, desc = "Neotree close" })
+            vim.keymap.set("n", "<leader>nb", ":Neotree buffers<CR>", { silent = true, desc = "Neotree show buffers" })
+            vim.keymap.set(
+                "n",
+                "<leader>ng",
+                ":Neotree git_status<CR>",
+                { silent = true, desc = "Neotree show git status" }
+            )
             vim.keymap.set(
                 "n",
                 "<leader>ns",
                 ":Neotree document_symbols<CR>",
-                { desc = "Neotree show document symbols" }
+                { silent = true, desc = "Neotree show document symbols" }
             )
         end,
     },

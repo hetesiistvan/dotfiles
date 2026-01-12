@@ -77,8 +77,8 @@ extend_path() {
         export PATH
     fi
 }
-extend_path "~/version-lock" "first"
-for path_element_list_item in "~/bin" "~/go/bin" "~/.krew/bin"; do
+extend_path "${HOME}/version-lock" "first"
+for path_element_list_item in "${HOME}/bin" "${HOME}/go/bin" "${HOME}/.krew/bin"; do
     extend_path "${path_element_list_item}"
 done
 

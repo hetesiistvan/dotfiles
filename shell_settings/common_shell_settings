@@ -84,15 +84,14 @@ done
 
 ## Proxy settings
 if [[ -n "${PROXY_URL:-}" ]]; then
-    alias proxy_on="export HTTP_PROXY=${PROXY_URL} HTTPS_PROXY=${PROXY_URL} ALL_PROXY=${PROXY_URL} http_proxy=${PROXY_URL} https_proxy=${PROXY_URL} all_proxy=${PROXY_URL} proxy=on"
-    alias proxy_off="unset HTTP_PROXY HTTPS_PROXY ALL_PROXY http_proxy https_proxy all_proxy proxy"
+    alias proxy_on="export HTTP_PROXY=${PROXY_URL} HTTPS_PROXY=${PROXY_URL} ALL_PROXY=${PROXY_URL} http_proxy=${PROXY_URL} https_proxy=${PROXY_URL} all_proxy=${PROXY_URL} NO_PROXY=localhost,127.0.0.1,::1 no_proxy=localhost,127.0.0.1,::1 proxy=on"
+    alias proxy_off="unset HTTP_PROXY HTTPS_PROXY ALL_PROXY http_proxy https_proxy all_proxy NO_PROXY no_proxy proxy"
 fi
 
 ## Aliases
 alias le="eza -o --no-permissions -g -h --group-directories-first --icons -a --git"
 alias bn="basename"
 alias my-cmatrix="cmatrix -b -s -u 9"
-alias opencode='env -u HTTP_PROXY -u HTTPS_PROXY -u ALL_PROXY -u http_proxy -u https_proxy -u all_proxy /opt/homebrew/bin/opencode'
 
 ## Zoxide init
 eval "$(zoxide init "${SHELL_BN}")"

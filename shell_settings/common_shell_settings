@@ -92,6 +92,7 @@ fi
 alias le="eza -o --no-permissions -g -h --group-directories-first --icons -a --git"
 alias bn="basename"
 alias my-cmatrix="cmatrix -b -s -u 9"
+alias tmuxs="tmuxp load homelab saas-mauth misc"
 
 ## Zoxide init
 eval "$(zoxide init "${SHELL_BN}")"

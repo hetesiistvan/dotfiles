@@ -107,34 +107,5 @@ return {
         )
 
         local oc_terminal = nil
-
-        local function oc_terminal_toggle()
-            if oc_terminal == nil then
-                oc_terminal = Terminal:new({
-                    cmd = "opencode",
-                    direction = "float",
-                    hidden = false,
-                    close_on_exit = false,
-                    size = 20,
-                    on_open = function()
-                        vim.cmd("startinsert!")
-                    end,
-                })
-            end
-            oc_terminal:toggle()
-        end
-
-        vim.keymap.set(
-            "n",
-            "<leader>to",
-            oc_terminal_toggle,
-            { noremap = true, silent = true, desc = "Toggle opencode terminal in normal mode" }
-        )
-        vim.keymap.set(
-            "t",
-            "<C-t>o",
-            oc_terminal_toggle,
-            { noremap = true, silent = true, desc = "Toggle opencode terminal in terminal mode" }
-        )
     end,
 }

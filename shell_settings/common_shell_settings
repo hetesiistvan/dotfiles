@@ -90,6 +90,20 @@ fi
 
 ## Aliases
 alias le="eza -o --no-permissions -g -h --group-directories-first --icons -a --git"
+alias gg="gh pr create"
+gb() {
+    local branch_selection
+    branch_selection="$(git branch | fzf | tr -d ' ')"
+    if [[ -z "${branch_selection}" ]]; then
+        return
+    fi
+    local re
+    re='^\*'
+    if [[ ${branch_selection} =~ ${re} ]]; then
+        return
+    fi
+    git checkout "${branch_selection}"
+}
 alias bn="basename"
 alias my-cmatrix="cmatrix -b -s -u 9"
 alias tmuxs="tmuxp load homelab saas-mauth misc"

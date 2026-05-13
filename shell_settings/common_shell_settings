@@ -107,6 +107,8 @@ gb() {
 alias bn="basename"
 alias my-cmatrix="cmatrix -b -s -u 9"
 alias tmuxs="tmuxp load homelab saas-mauth misc"
+alias gt="tmux next-window"
+alias gT="tmux previous-window"
 
 ## Zoxide init
 eval "$(zoxide init "${SHELL_BN}")"

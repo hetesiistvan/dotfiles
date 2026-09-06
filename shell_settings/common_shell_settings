@@ -90,7 +90,8 @@ fi
 
 ## Aliases
 alias le="eza -o --no-permissions -g -h --group-directories-first --icons -a --git"
-alias gg="gh pr create"
+alias gg="gh pr create --assignee '@me'"
+alias lg="lazygit"
 gb() {
     local branch_selection
     branch_selection="$(git branch | fzf | tr -d ' ')"
